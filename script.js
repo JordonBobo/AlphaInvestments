@@ -15,15 +15,14 @@ $("#searchBtn").click(function () {
     url: symbolSearch,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     for (i = 0; i < response.bestMatches.length; i++) {
       if (response.bestMatches[i]["4. region"] === "United States") {
-        console.log(response.bestMatches[i]);
+        console.log(response.bestMatches[i]["1. symbol"]);
       }
     }
   });
 
-  // ajax calls for stock information
+  // COMPANY OVERVIEW API CALL
 
   var overviewUrl =
     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
@@ -36,6 +35,21 @@ $("#searchBtn").click(function () {
     method: "GET",
   }).then(function (response) {
     console.log(response);
+    var newsCompany = response.Name;
+
+    // NEWS SEARCH API CALL
+
+    var newsUrl =
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      newsCompany +
+      "&api-key=mucdpZxSaLprDSOXjHQmG9skw5jyQeci";
+
+    $.ajax({
+      url: newsUrl,
+      method: "GET",
+    }).then(function (response) {
+      console.log(response.response.docs[0]);
+    });
   });
 
   var stockUrl =
@@ -48,8 +62,6 @@ $("#searchBtn").click(function () {
     url: stockUrl,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
-
     for (let data of Object.entries(response["Weekly Time Series"])) {
       console.log(data);
     }

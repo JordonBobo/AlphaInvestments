@@ -1,4 +1,5 @@
 $("#searchBtn").click(function () {
+  var vantageKey = "PPU2C3YN8OQAFVPV";
   var company = $("#companySearch").val();
   console.log(company);
 
@@ -7,7 +8,8 @@ $("#searchBtn").click(function () {
   var symbolSearch =
     "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
     company +
-    "&apikey=HJSI78XPL8KLZ1JA";
+    "&apikey=" +
+    vantageKey;
 
   $.ajax({
     url: symbolSearch,
@@ -26,7 +28,8 @@ $("#searchBtn").click(function () {
   var overviewUrl =
     "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
     company +
-    "&apikey=HJSI78XPL8KLZ1JA";
+    "&apikey=" +
+    vantageKey;
 
   $.ajax({
     url: overviewUrl,
@@ -38,7 +41,8 @@ $("#searchBtn").click(function () {
   var stockUrl =
     "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
     company +
-    "&apikey=HJSI78XPL8KLZ1JA";
+    "&apikey=" +
+    vantageKey;
 
   $.ajax({
     url: stockUrl,

@@ -14,10 +14,22 @@ $("#searchBtn").click(function () {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    for (i = 0; i < response.bestMatches.length; i++) {
-      if (response.bestMatches[i]["4. region"] === "United States") {
-        console.log(response.bestMatches[i]);
-      }
+    var arrBestMatches = response.bestMatches;
+    var usMatches = [];
+    var maxMatches = arrBestMatches.length;
+    if(maxMatches>75){
+      maxMatches=75;
+    }
+    for (i = 0; i < maxMatches; i++) {
+      if (arrBestMatches[i]["4. region"] === "United States") {
+        var objComp = {symbol: arrBestMatches[i]["1. symbol"],
+                       name: arrBestMatches[i]["2. name"]};
+        usMatches.push(objComp);
+      };
+    };
+    if(usMatches.length > 1){
+      company = selectOneStock(usMatches);
+      $("#companySearch").val(company); 
     }
   });
 
@@ -51,3 +63,19 @@ $("#searchBtn").click(function () {
     }
   });
 });
+
+
+function selectOneStock(usMatches){
+  $("#stockList").empty();
+  for (var i = 0; i < usMatches.length; i++) {
+      var bStk = $("<button>")
+          .attr("type", "submit")
+          .text(usMatches[i].symbol+" "+usMatches[i].name)
+          .attr("id",usMatches[i].symbol)
+          .click(function () {
+            alert(this.id);
+            return(this.id);              
+          });
+      $("#stockList").append(bStk);
+  }
+}

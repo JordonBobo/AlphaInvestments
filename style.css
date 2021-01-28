@@ -1,0 +1,47 @@
+img{
+    background-image: url(stockImg.jpg);
+    background-repeat: round;
+    height: 530px;
+    background-size: contain;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+     background-image: linear-gradient(to top, #537895 0%, #09203f 100%);
+    width: 100%;
+}
+
+main {
+    flex: 1 0 auto; 
+    padding-top: 25px;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 25px;
+}
+
+footer{
+    background-image: linear-gradient(to top, #537895 0%, #09203f  100%);
+}
+
+.bgColor{
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+
+.tab{
+    width: 25%;
+}
+
+.padding{
+    padding-top: 20px;
+}
+
+#center{
+    text-align: center;
+}
+
+.footer{
+    padding: 30px 0px;
+}

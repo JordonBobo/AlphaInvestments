@@ -31,7 +31,7 @@ footer{
 }
 
 .tab{
-    width: 25%;
+    width: 50%;
 }
 
 .padding{
@@ -44,4 +44,20 @@ footer{
 
 .footer{
     padding: 30px 0px;
+}
+
+.cardPadding{
+    padding: 10%;
+}
+
+.floatLeft{
+    float: left;
+    width: 50%;
+    padding-right: 5%;
+}
+
+.floatRight{
+    float: right;
+    width: 50%;
+    padding-left: 5%;
 }

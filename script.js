@@ -4,12 +4,13 @@ var stock1 = "";
 var closingValue2 = [];
 var stock2 = "";
 var closingDate = [];
+var newsCompany = "";
 
 //    add as univerisal variables in JS ================================
 
-$("#searchBtn").click(function () {
+$("#searchBtn2").click(function () {
   var vantageKey = "PPU2C3YN8OQAFVPV";
-  var company = $("#companySearch").val();
+  var company = $("#companySearch2").val();
   console.log(company);
 
   // searching company name and gathering stock abbreviation
@@ -153,7 +154,7 @@ $("#searchBtn").click(function () {
     // End of my stuff to add =============================================================
 
     for (let data of Object.entries(response["Weekly Time Series"])) {
-      console.log(data);
+      // console.log(data);
     }
   });
 });

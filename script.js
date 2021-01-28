@@ -24,11 +24,9 @@ $("#searchBtn").click(function () {
     url: symbolSearch,
     method: "GET",
   }).then(function (response) {
-    for (i = 0; i < response.bestMatches.length; i++) {
-      if (response.bestMatches[i]["4. region"] === "United States") {
-        console.log(response.bestMatches[i]["1. symbol"]);
-      }
-    }
+    console.log(response);
+
+    company = selectOneStock(response.bestMatches);
   });
 
   // COMPANY OVERVIEW API CALL
@@ -176,6 +174,45 @@ var low =
   testArray.reduce(function (a, b) {
     return Math.min(a, b);
   });
+function selectOneStock(arrBestMatches) {
+  $("#stockList").empty();
+  if (arrBestMatches.length == 0) {
+    alert("The company does not have a stock symbol");
+    return usMatches[0].symbol;
+  }
+
+  var usMatches = [];
+  var maxMatches = arrBestMatches.length;
+  if (maxMatches > 75) {
+    maxMatches = 75;
+  }
+  for (i = 0; i < maxMatches; i++) {
+    if (arrBestMatches[i]["4. region"] === "United States") {
+      var objComp = {
+        symbol: arrBestMatches[i]["1. symbol"],
+        name: arrBestMatches[i]["2. name"],
+      };
+      usMatches.push(objComp);
+    }
+  }
+
+  if (usMatches.length == 1) {
+    alert(usMatches[0].symbol);
+    return usMatches[0].symbol;
+  }
+
+  for (var i = 0; i < usMatches.length; i++) {
+    var bStk = $("<button>")
+      .attr("type", "submit")
+      .text(usMatches[i].symbol + " " + usMatches[i].name)
+      .attr("id", usMatches[i].symbol)
+      .click(function () {
+        alert("Symbol " + this.id + " has been selected");
+        return this.id;
+      });
+    $("#stockList").append(bStk);
+  }
+}
 
 //price has gone up or down since last week, color change as well
 var testCurrentDay = 75.31;

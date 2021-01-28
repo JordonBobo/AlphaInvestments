@@ -14,9 +14,9 @@ $("#searchBtn").click(function () {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    
+
     company = selectOneStock(response.bestMatches);
-  
+
   });
 
   // ajax calls for stock information
@@ -57,7 +57,7 @@ function selectOneStock(arrBestMatches) {
     alert('The company does not have a stock symbol');
     return (usMatches[0].symbol);
   };
-  
+
   var usMatches = [];
   var maxMatches = arrBestMatches.length;
   if (maxMatches > 75) {
@@ -84,10 +84,11 @@ function selectOneStock(arrBestMatches) {
       .text(usMatches[i].symbol + " " + usMatches[i].name)
       .attr("id", usMatches[i].symbol)
       .click(function () {
-        alert(this.id);
+        alert("Symbol " + this.id + " has been selected")
         return (this.id);
       });
     $("#stockList").append(bStk);
   }
-  
+
 }
+

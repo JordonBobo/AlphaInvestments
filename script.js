@@ -35,9 +35,9 @@ $("#searchBtn").click(function () {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    var newsCompany = response.Name;
 
     // NEWS SEARCH API CALL
+    var newsCompany = response.Name;
 
     var newsUrl =
       "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
@@ -51,6 +51,8 @@ $("#searchBtn").click(function () {
       console.log(response.response.docs[0]);
     });
   });
+
+  // STOCK DATA API CALL
 
   var stockUrl =
     "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +

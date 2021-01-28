@@ -24,20 +24,20 @@
     You can delete these styles or move it to your custom css file -->
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body>
+  <body >
     <header>
-      <nav class="nav-extended bgColor padding">
+      <nav class="nav-extended bgColor padding ">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Alpha Investments</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="index.html">Home</a></li>
+          <a href="#" class="brand-logo center">Alpha Investments</a>
+          <ul id="nav-mobile" class="right home">
+            <li class="home"><a href="index.html">Home</a></li>
           </ul>
         </div>
       </nav>
     </header>
     <main class="bgColor white-text center">
       <!-- Your content here -->
-      <form>
+      <form class="padding">
         <input
           type="text2"
           placeholder="Search For another Company"
@@ -46,23 +46,40 @@
         <button type="button" id="searchBtn2">Search</button>
       </form>
       <div class="btn-group" id="stockList"></div>
-      <div class="container" id="myChart">
-        <canvas id="chart" width="250px" heigh="250px"></canvas>
+
+      <div class="card" >
+        <div class="card-content black-text containerChart">
+          <h3>Stock Market Chart</h3>
+          <canvas id="chart" width="250px" heigh="250px"></canvas>
+          
+        </div>
       </div>
-      <div class="row">
-        <div class="col s12 m8 l6 center">
-          <h5 class="white-text">About Us</h5>
+      
+      <div class="row padding">
+        <div class="floatLeft center">
+          <h5 class="white-text">Yearly High</h5>
+          <p class="grey-text text-lighten-4 highs">
+            You can use rows and columns here to organize your footer content.
+          </p>
+        </div>
+        <div class="FloatRight center lows">
+          <h5 class="white-text">Yearly Low</h5>
           <p class="grey-text text-lighten-4">
             You can use rows and columns here to organize your footer content.
           </p>
         </div>
-        <div class="col s12 m4 l6 center">
-          <h5 class="white-text">What we provide</h5>
-          <p class="grey-text text-lighten-4">
-            You can use rows and columns here to organize your footer content.
-          </p>
+      </div>
+
+      <div class="card ">
+        <div class="card-content black-text">
+          <span class="card-title"></span>
+          <h3 class="stockName">News On: </h3>
+          <p class="news"></p>
+
+
         </div>
       </div>
+
     </main>
     <footer class="page-footer">
       <div class="container"></div>

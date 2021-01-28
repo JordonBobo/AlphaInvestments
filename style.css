@@ -42,7 +42,7 @@ footer {
 }
 
 .padding {
-  padding-top: 20px;
+  padding: 20px 0px;
 }
 
 #center {
@@ -71,4 +71,8 @@ footer {
     float: right;
     width: 50%;
     padding-left: 5%;
+}
+
+.home{
+  margin-right: 10%;
 }

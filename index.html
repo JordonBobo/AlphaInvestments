@@ -15,43 +15,31 @@
     <!-- Materialize CSS CDN -->
     <link
       rel="stylesheet"
+      type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
     <!-- Your custom styles -->
-    <link rel="stylesheet" href="css/style.css" />
+
     <!-- Used as an example only to position the footer at the end of the page.
     You can delete these styles or move it to your custom css file -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
     <header>
       <nav class="nav-extended bgColor padding">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">Alpha Investments</a>
-        </div>
-        <div class="nav-content center-align">
-          <ul class="tabs tabs-transparent center-align">
-            <li class="tab"><a href="index.html">Home</a></li>
-            <li class="tab"><a href="stockmarket.html">Stock Market</a></li>
-            <li class="tab">
-              <a class="active" href="crypto.html">Crypto Currencies</a>
-            </li>
-            <li class="tab"><a href="forex.html">Forex</a></li>
+          <a href="#" class="brand-logo">Alpha Investments</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="stockmarket.html">Stock Market</a></li>
           </ul>
         </div>
       </nav>
       <div>
         <img class="stockImg" />
+        <!-- Your content here -->
       </div>
     </header>
-    <main class="bgColor white-text center">
-      <!-- Your content here -->
-      <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit temporibus minima repellat esse. Beatae facere quisquam error nostrum dolore ipsum accusantium quis amet illum at distinctio, rerum animi quod earum.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit temporibus minima repellat esse. Beatae facere
-        quisquam error nostrum dolore ipsum accusantium quis amet illum at distinctio, rerum animi quod earum.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit temporibus minima repellat esse. Beatae facere
-          quisquam error nostrum dolore ipsum accusantium quis amet illum at distinctio, rerum animi quod earum.</p> -->
-    </main>
+    <main class="bgColor white-text center"></main>
     <footer class="page-footer">
       <div class="container">
         <div class="row">
@@ -76,21 +64,6 @@
         </div>
       </div>
     </footer>
-
-    <form>
-      <input
-        type="text2"
-        placeholder="Search For another Company"
-        id="companySearch2"
-      />
-      <button type="button" id="searchBtn2">Search</button>
-    </form>
-    <div class="btn-group" id="stockList"></div>
-    <div class="container" id="myChart">
-      <!-- my stuff to add ========================================= -->
-      <canvas id="chart" width="250px" heigh="250px"></canvas>
-      <!-- my stuff to add ========================================= -->
-    </div>
 
     <!-- jQuery CDN -->
     <script

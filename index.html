@@ -2,20 +2,24 @@
 <html lang="en">
   <head>
     <title>Title</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <!-- Bootstrap CSS -->
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="style.css" />
+    <!-- my stuff to add ========================================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <!-- my stuff to add ========================================= -->
+
   </head>
   <body>
     <form>
@@ -23,8 +27,23 @@
       <button type="button" id="searchBtn">Search</button>
     </form>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    
+    <form>
+      <input type="text2" placeholder="Search For another Company" id="companySearch2" />
+      <button type="button" id="searchBtn2">Search</button>
+    </form>
+    
+    <div class="container" id="myChart">
+      <!-- my stuff to add ========================================= -->
+      <canvas id="chart" width="250px" heigh="250px"></canvas>
+      <!-- my stuff to add ========================================= -->
+      
+    </div>
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

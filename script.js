@@ -175,8 +175,13 @@ var low =
   testArray.reduce(function (a, b) {
     return Math.min(a, b);
   });
+
+
+
 function selectOneStock(arrBestMatches) {
+  
   $("#stockList").empty();
+
   if (arrBestMatches.length == 0) {
     alert("The company does not have a stock symbol");
     return usMatches[0].symbol;
@@ -207,6 +212,7 @@ function selectOneStock(arrBestMatches) {
       .attr("type", "submit")
       .text(usMatches[i].symbol + " " + usMatches[i].name)
       .attr("id", usMatches[i].symbol)
+      .attr("class","waves-effect waves-light btn")
       .click(function () {
         alert("Symbol " + this.id + " has been selected");
         return this.id;

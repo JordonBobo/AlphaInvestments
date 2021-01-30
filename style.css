@@ -37,8 +37,8 @@ footer {
   width: 25%;
 }
 
-.tab{
-    width: 50%;
+.tab {
+  width: 50%;
 }
 
 .padding {
@@ -57,18 +57,22 @@ footer {
   color: black;
 }
 
-.cardPadding{
-    padding: 10%;
+.cardPadding {
+  padding: 10%;
 }
 
-.floatLeft{
-    float: left;
-    width: 50%;
-    padding-right: 5%;
+.floatLeft {
+  float: left;
+  width: 50%;
+  padding-right: 5%;
 }
 
-.floatRight{
-    float: right;
-    width: 50%;
-    padding-left: 5%;
+.floatRight {
+  float: right;
+  width: 50%;
+  padding-left: 5%;
+}
+
+.btnColor {
+  background-color: #09203f;
 }

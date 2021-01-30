@@ -31,12 +31,13 @@ $("#searchBtn2").click(function () {
     console.log(currentCompany)
           // function for deciding which stock the user wants
 function selectOneStock(arrBestMatches) {
+  
   $("#stockList").empty();
+
   if (arrBestMatches.length == 0) {
     alert("The company does not have a stock symbol");
-    // THIS IS AN ALERT, Maybe we can update it to say:
-    //$("#stockList").text("0 results found")
-    return usMatches[0].symbol;
+    $("#stockList").text("0 results found");
+   return;
   }
 
   var usMatches = [];
@@ -55,8 +56,14 @@ function selectOneStock(arrBestMatches) {
   }
 
   if (usMatches.length == 1) {
-    alert(usMatches[0].symbol);
-    return usMatches[0].symbol;
+    currentSymbol = usMatches[0].symbol;        
+    currentCompany = usMatches[0].name;         
+    weeklyDate = [];
+    weeklyValue = [];
+    buildCompanyInfo();
+    buildStockInfo();
+    buildNewsInfo();
+    return;
   }
 
   for (var i = 0; i < usMatches.length; i++) {

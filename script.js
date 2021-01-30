@@ -27,7 +27,6 @@ $("#searchBtn2").click(function (event) {
   }).then(function (response) {
     currentCompany = selectOneStock(response.bestMatches);
 
-    console.log(currentCompany);
     // function for deciding which stock the user wants
     function selectOneStock(arrBestMatches) {
       $("#stockList").empty();
@@ -108,7 +107,6 @@ function buildCompanyInfo() {
     url: companySearch,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     var overviewSymbol = response.Symbol;
     var overviewName = response.Name;
     var overviewDescription = response.Description;

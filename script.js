@@ -1,9 +1,11 @@
-//    add as univerisal variables in JS ================================
+
+
+  //Universal variables and placeholders that need to be unversal scope
 var weeklyValue = [];
 var weeklyDate = [];
 var vantageKey = "PPU2C3YN8OQAFVPV";        //stock api key
 var newsApiKey = "mucdpZxSaLprDSOXjHQmG9skw5jyQeci";
-var currentCompany = ""
+var currentCompany = "";
 var currentSymbol = "";
 
 
@@ -11,31 +13,29 @@ var currentSymbol = "";
             //==================PART I === Search Bar ==============\\
 $("#searchBtn2").click(function () {
   var tempCompany = $("#companySearch2").val();   //form to get user search input
-console.log(tempCompany)
                       // URL that searches best matches for possible company symbol
   var getSymbol =
     "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
     tempCompany +
     "&apikey=" +
     vantageKey;
-console.log(getSymbol);
       // API Call that gets the symbol from the user and esablishes the currentCompany
   $.ajax({
     url: getSymbol,
     method: "GET",
   }).then(function (response) {
-      console.log(response.bestMatches)
-     selectOneStock(response.bestMatches);
+    currentCompany = selectOneStock(response.bestMatches);
     
-    
+    console.log(currentCompany)
           // function for deciding which stock the user wants
 function selectOneStock(arrBestMatches) {
+  
   $("#stockList").empty();
+
   if (arrBestMatches.length == 0) {
     alert("The company does not have a stock symbol");
-    // THIS IS AN ALERT, Maybe we can update it to say:
-    //$("#stockList").text("0 results found")
-    return usMatches[0].symbol;
+    $("#stockList").text("0 results found");
+   return;
   }
 
   var usMatches = [];
@@ -55,14 +55,22 @@ function selectOneStock(arrBestMatches) {
   }
 
   if (usMatches.length == 1) {
-    alert(usMatches[0].symbol);
-    return usMatches[0].symbol;
+    currentSymbol = usMatches[0].symbol;        
+    currentCompany = usMatches[0].name;         
+    weeklyDate = [];
+    weeklyValue = [];
+    buildCompanyInfo();
+    buildStockInfo();
+    buildNewsInfo();
+    localStorage.setItem("key1", stockSymbol)
+    return;
   }
 
   for (var i = 0; i < usMatches.length; i++) {
     var bStk = $("<button>")
       .attr("type", "submit")
       .attr("name", usMatches[i].name)
+      .attr("class", "btnColor")
       .attr("id", usMatches[i].symbol)
       .text(usMatches[i].symbol + " " + usMatches[i].name)
       .click(function generatePage () {
@@ -73,8 +81,7 @@ function selectOneStock(arrBestMatches) {
         buildCompanyInfo();
         buildStockInfo();
         buildNewsInfo();
-        localStorage.setItem("key1", currentSymbol);
-
+        localStorage.setItem("key1", stockSymbol);
         // alert("Symbol " + this.id + " has been selected");
         // return this.id;
       });
@@ -88,12 +95,11 @@ function selectOneStock(arrBestMatches) {
         //==========PART II=== Company INFO=========\\
 function buildCompanyInfo() {
 
-    var infoCompany = $("#companySearch2").val().trim(); 
-    console.log(infoCompany)
+
         // new url that takes the comany as a symbol not user input
         var companySearch =
         "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" +
-        infoCompany +
+        currentSymbol +
         "&apikey=" +
         vantageKey;
     
@@ -102,10 +108,7 @@ function buildCompanyInfo() {
         url: companySearch,
         method: "GET",
       }).then(function (response) {
-          console.log(response);
-          
           return response;
-         
 
 
       });
@@ -129,43 +132,6 @@ function buildStockInfo() {
           url: stockUrl,
           method: "GET",
         }).then(function (response) {
-
-      
-
-
-// These don't yet exist on the page, but we can add easily
-// High and low price in the last year
-$("#high").text(high);
-var testArray = [1, 6, 8, 9, 9];
-var high =
-  "$" +
-  testArray.reduce(function (a, b) {
-    return Math.max(a, b);
-  });
-var low =
-  "$" +
-  testArray.reduce(function (a, b) {
-    return Math.min(a, b);
-  });
-
-//price has gone up or down since last week, color change as well
-var testCurrentDay = 75.31;
-var testPreviousDay = 76.82;
-function percentageChange(current, previous) {
-  var change = current - previous;
-  return (change / previous) * 100;
-}
-var changeStock = percentageChange(testCurrentDay, testPreviousDay);
-if (changeStock > 0) {
-  $("#percent").attr("class", "green");
-} else if (changeStock < 0) {
-  $("#percent").attr("class", "red");
-} else {
-  $("#percent").attr("class", "black");
-}
-
-
-
 
 
               //Assembles the data that is inserted into the chart
@@ -260,7 +226,6 @@ function buildNewsInfo() {
 
     //    Local storage stuff
    
-    
 
     var storedInfo = localStorage.getItem("key1");
     function displayLastSearch() {
@@ -271,4 +236,10 @@ function buildNewsInfo() {
         buildNewsInfo();
       }
     }
-    $(document).ready(displayLastSearch())
+    $(document).ready(displayLastSearch());
+
+    
+
+
+
+

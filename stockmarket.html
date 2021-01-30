@@ -18,6 +18,7 @@
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
+    <link rel="shortcut icon" href="/stock-icon.png">
     <!-- Your custom styles -->
 
     <!-- Used as an example only to position the footer at the end of the page.
@@ -37,21 +38,23 @@
     </header>
     <main class="bgColor white-text center">
       <!-- Your content here -->
-      <form class="padding">
-        <input
-          type="text2"
-          placeholder="Search For another Company"
-          id="companySearch2"
-        />
-        <button type="button" id="searchBtn2">Search</button>
-      </form>
+      <div>
+        <form class="padding">
+          <input
+            type="text2"
+            placeholder="Search Stock"
+            id="companySearch2"
+          />
+          <button type="button" id="searchBtn2" class="btnColor">Search</button>
+        </form>
+      </div>
+
       <div class="btn-group padding" id="stockList"></div>
 
       <div class="card" >
         <div class="card-content black-text containerChart">
           <h3>Stock Market Chart</h3>
           <canvas id="chart" width="250px" heigh="250px"></canvas>
-          
         </div>
       </div>
       
@@ -73,7 +76,7 @@
       <div class="card ">
         <div class="card-content black-text">
           <span class="card-title"></span>
-          <h3 class="stockName">News On: </h3>
+          <h3 class="stockName">News </h3>
           <p class="news"></p>
 
 
@@ -84,8 +87,8 @@
     <footer class="page-footer">
       <div class="container"></div>
       <div class="footer">
-        <div class="container">
-          The A Team © 2021 Copyright
+        <div class="container center">
+          The A Team © 2021
           <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
       </div>

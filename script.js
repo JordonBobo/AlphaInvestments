@@ -13,14 +13,12 @@ var currentSymbol = "";
             //==================PART I === Search Bar ==============\\
 $("#searchBtn2").click(function () {
   var tempCompany = $("#companySearch2").val();   //form to get user search input
-
                       // URL that searches best matches for possible company symbol
   var getSymbol =
     "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
     tempCompany +
     "&apikey=" +
     vantageKey;
-
       // API Call that gets the symbol from the user and esablishes the currentCompany
   $.ajax({
     url: getSymbol,
@@ -52,6 +50,7 @@ function selectOneStock(arrBestMatches) {
         name: arrBestMatches[i]["2. name"],
       };
       usMatches.push(objComp);
+      //console.log(objComp);
     }
   }
 
@@ -63,6 +62,7 @@ function selectOneStock(arrBestMatches) {
     buildCompanyInfo();
     buildStockInfo();
     buildNewsInfo();
+    localStorage.setItem("key1", stockSymbol)
     return;
   }
 
@@ -70,6 +70,7 @@ function selectOneStock(arrBestMatches) {
     var bStk = $("<button>")
       .attr("type", "submit")
       .attr("name", usMatches[i].name)
+      .attr("class", "btnColor")
       .attr("id", usMatches[i].symbol)
       .text(usMatches[i].symbol + " " + usMatches[i].name)
       .click(function generatePage () {
@@ -79,7 +80,8 @@ function selectOneStock(arrBestMatches) {
         weeklyValue = [];
         buildCompanyInfo();
         buildStockInfo();
-        buildNewsInfo()
+        buildNewsInfo();
+        localStorage.setItem("key1", stockSymbol);
         // alert("Symbol " + this.id + " has been selected");
         // return this.id;
       });
@@ -130,43 +132,6 @@ function buildStockInfo() {
           url: stockUrl,
           method: "GET",
         }).then(function (response) {
-
-      
-
-
-// These don't yet exist on the page, but we can add easily
-// High and low price in the last year
-$("#high").text(high);
-var testArray = [1, 6, 8, 9, 9];
-var high =
-  "$" +
-  testArray.reduce(function (a, b) {
-    return Math.max(a, b);
-  });
-var low =
-  "$" +
-  testArray.reduce(function (a, b) {
-    return Math.min(a, b);
-  });
-
-//price has gone up or down since last week, color change as well
-var testCurrentDay = 75.31;
-var testPreviousDay = 76.82;
-function percentageChange(current, previous) {
-  var change = current - previous;
-  return (change / previous) * 100;
-}
-var changeStock = percentageChange(testCurrentDay, testPreviousDay);
-if (changeStock > 0) {
-  $("#percent").attr("class", "green");
-} else if (changeStock < 0) {
-  $("#percent").attr("class", "red");
-} else {
-  $("#percent").attr("class", "black");
-}
-
-
-
 
 
               //Assembles the data that is inserted into the chart
@@ -260,15 +225,20 @@ function buildNewsInfo() {
 
 
     //    Local storage stuff
-    var stockSymbol = "tsla";
-    localStorage.setItem("key1", stockSymbol);
+   
 
     var storedInfo = localStorage.getItem("key1");
     function displayLastSearch() {
       if (storedInfo !== undefined && storedInfo !== null) {
-        stockSymbol = storedInfo;
+        currentSymbol = storedInfo;
+        buildCompanyInfo();
+        buildStockInfo();
+        buildNewsInfo();
       }
     }
+    $(document).ready(displayLastSearch());
+
+    
 
 
 

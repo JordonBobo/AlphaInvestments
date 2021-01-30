@@ -7,7 +7,8 @@ var currentCompany = "";
 var currentSymbol = "";
 
 //==================PART I === Search Bar ==============\\
-$("#searchBtn2").click(function () {
+$("#searchBtn2").click(function (event) {
+  event.preventDefault();
   var tempCompany = $("#companySearch2").val();
 
   //form to get user search input

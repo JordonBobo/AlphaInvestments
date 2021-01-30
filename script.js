@@ -78,6 +78,7 @@ $("#searchBtn2").click(function (event) {
             currentCompany = this.name;
             weeklyDate = [];
             weeklyValue = [];
+
             buildCompanyInfo();
             buildStockInfo();
             buildNewsInfo();
@@ -171,7 +172,11 @@ function buildStockInfo() {
       //function the builds the chart into the page on the canvas element
       //source: chartjs.org
       function visualData() {
-        var ctx = document.getElementById("chart").getContext("2d");
+        $("#chart").remove();
+        $(".containerChart").append('<canvas id="chart">');
+        var canvas = document.getElementById("chart");
+        var ctx = canvas.getContext("2d");
+
         Chart.defaults.global.defaultFontColor = "black";
         var myChart = new Chart(ctx, {
           type: "line",

@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,8 +17,8 @@
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
+    <link rel="shortcut icon" href="/images/stock-icon.png" />
     <!-- Your custom styles -->
-
     <!-- Used as an example only to position the footer at the end of the page.
     You can delete these styles or move it to your custom css file -->
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -28,8 +27,8 @@
     <header>
       <nav class="nav-extended bgColor padding">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Alpha Investments</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <a href="#" class="brand-logo center">Alpha Investments</a>
+          <ul id="nav-mobile" class="right">
             <li><a href="index.html">Home</a></li>
           </ul>
         </div>
@@ -37,47 +36,56 @@
     </header>
     <main class="bgColor white-text center">
       <!-- Your content here -->
-      <form>
-        <input
-          type="text2"
-          placeholder="Search For another Company"
-          id="companySearch2"
-        />
-        <button type="button" id="searchBtn2" class="btn waves-effect waves-light btnsearch">Search</button>
-      </form>
-      <div class="btn-group" id="stockList"></div>
-      <div class="container" id="myChart">
-        <canvas id="chart" width="250px" heigh="250px"></canvas>
+      <div>
+        <form>
+          <input
+            type="text2"
+            placeholder="Search For another Company"
+            id="companySearch2"
+          />
+          <button
+            type="submit"
+            id="searchBtn2"
+            class="btn waves-effect waves-light btnsearch"
+          >
+            Search
+          </button>
+        </form>
       </div>
-      <div class=“container”>
-        <h4 id=“newsHeadLine”></h4>
-        <p id=“newsSnippet”></p>
-      </div>
-      <div class="row">
-        <div class="col s12 m8 l6 center">
-          <h5 class="white-text">About Us</h5>
-          <p class="grey-text text-lighten-4">
-            You can use rows and columns here to organize your footer content.
-          </p>
+
+      <div class="btn-group padding" id="stockList"></div>
+
+      <div class="card">
+        <div class="card-content black-text">
+          <span class="card-title"></span>
+          <h4 id="overviewName" class="stockName">Company Overview</h4>
+          <p id="overviewDescription" class="news"></p>
         </div>
-        <div class="col s12 m4 l6 center">
-          <h5 class="white-text">What we provide</h5>
-          <p class="grey-text text-lighten-4">
-            You can use rows and columns here to organize your footer content.
-          </p>
+      </div>
+      <!-- Company Overview Card -->
+      <div class="card">
+        <div class="card-content black-text containerChart">
+          <h3>12 Month Performance</h3>
+        </div>
+      </div>
+      <!-- News Card -->
+      <div class="card">
+        <div class="card-content black-text">
+          <span class="card-title"></span>
+          <h5>Company News</h5>
+          <h4 id="newsHeadLine" class="stockName"></h4>
+          <p id="newsSnippet" class="news"></p>
+          <br />
+          <a id="newsUrl" href="#" target="_blank"></a>
         </div>
       </div>
     </main>
     <footer class="page-footer">
       <div class="container"></div>
       <div class="footer">
-        <div class="container">
-          The A Team © 2021 Copyright
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
+        <div class="container center">The A Team © 2021</div>
       </div>
     </footer>
-
     <!-- jQuery CDN -->
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -88,6 +96,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

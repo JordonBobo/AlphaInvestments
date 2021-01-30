@@ -2,7 +2,7 @@
   width: 80%;
 }
 img {
-  background-image: url(stockImg.jpg);
+  background-image: url(/images/stockImg.jpg);
   background-repeat: round;
   height: 530px;
   background-size: contain;
@@ -37,8 +37,8 @@ footer {
   width: 25%;
 }
 
-.tab{
-    width: 50%;
+.tab {
+  width: 50%;
 }
 
 .padding {
@@ -55,29 +55,37 @@ footer {
 
 #companySearch2 {
   color: black;
-
 }
 
-.cardPadding{
-    padding: 10%;
+.cardPadding {
+  padding: 10%;
 }
 
-.floatLeft{
-    float: left;
-    width: 50%;
-    padding-right: 5%;
+.floatLeft {
+  float: left;
+  width: 50%;
+  padding-right: 5%;
 }
 
-.floatRight{
-    float: right;
-    width: 50%;
-    padding-left: 5%;
+.floatRight {
+  float: right;
+  width: 50%;
+  padding-left: 5%;
 }
 
-#stockList{
+.btnColor {
+  background-color: #09203f;
+}
+.floatRight {
+  float: right;
+  width: 50%;
+  padding-left: 5%;
+}
+
+#stockList {
   margin: 10px;
 }
 
-#companySearch2{
+#companySearch2 {
   height: 36px;
 }

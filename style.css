@@ -76,3 +76,16 @@ footer {
 .btnColor {
   background-color: #09203f;
 }
+.floatRight {
+  float: right;
+  width: 50%;
+  padding-left: 5%;
+}
+
+#stockList {
+  margin: 10px;
+}
+
+#companySearch2 {
+  height: 36px;
+}

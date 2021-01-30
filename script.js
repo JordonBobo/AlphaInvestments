@@ -8,7 +8,9 @@ var currentSymbol = "";
 
 //==================PART I === Search Bar ==============\\
 $("#searchBtn2").click(function () {
-  var tempCompany = $("#companySearch2").val(); //form to get user search input
+  var tempCompany = $("#companySearch2").val();
+
+  //form to get user search input
 
   // URL that searches best matches for possible company symbol
   var getSymbol =
@@ -28,11 +30,11 @@ $("#searchBtn2").click(function () {
     // function for deciding which stock the user wants
     function selectOneStock(arrBestMatches) {
       $("#stockList").empty();
+
       if (arrBestMatches.length == 0) {
         alert("The company does not have a stock symbol");
-        // THIS IS AN ALERT, Maybe we can update it to say:
-        //$("#stockList").text("0 results found")
-        return usMatches[0].symbol;
+        $("#stockList").text("0 results found");
+        return;
       }
 
       var usMatches = [];
@@ -47,18 +49,28 @@ $("#searchBtn2").click(function () {
             name: arrBestMatches[i]["2. name"],
           };
           usMatches.push(objComp);
+          //console.log(objComp);
         }
       }
 
       if (usMatches.length == 1) {
-        alert(usMatches[0].symbol);
-        return usMatches[0].symbol;
+        currentSymbol = usMatches[0].symbol;
+        currentCompany = usMatches[0].name;
+        weeklyDate = [];
+        weeklyValue = [];
+        buildCompanyInfo();
+        buildStockInfo();
+        buildNewsInfo();
+        localStorage.setItem("key1", currentSymbol);
+        localStorage.setItem("key2", currentCompany);
+        return;
       }
 
       for (var i = 0; i < usMatches.length; i++) {
         var bStk = $("<button>")
           .attr("type", "submit")
           .attr("name", usMatches[i].name)
+          .attr("class", "btnColor")
           .attr("id", usMatches[i].symbol)
           .text(usMatches[i].symbol + " " + usMatches[i].name)
           .click(function generatePage() {
@@ -69,6 +81,8 @@ $("#searchBtn2").click(function () {
             buildCompanyInfo();
             buildStockInfo();
             buildNewsInfo();
+            localStorage.setItem("key1", currentSymbol);
+            localStorage.setItem("key2", currentCompany);
             // alert("Symbol " + this.id + " has been selected");
             // return this.id;
           });
@@ -97,6 +111,7 @@ function buildCompanyInfo() {
     var overviewSymbol = response.Symbol;
     var overviewName = response.Name;
     var overviewDescription = response.Description;
+
     $("#overviewName").text(overviewName);
     $("#overviewDescription").text(overviewDescription);
   });
@@ -132,71 +147,67 @@ function buildStockInfo() {
         return Math.min(a, b);
       });
 
-    //price has gone up or down since last week, color change as well
-    var testCurrentDay = 75.31;
-    var testPreviousDay = 76.82;
-    function percentageChange(current, previous) {
-      var change = current - previous;
-      return (change / previous) * 100;
-    }
-    var changeStock = percentageChange(testCurrentDay, testPreviousDay);
-    if (changeStock > 0) {
-      $("#percent").attr("class", "green");
-    } else if (changeStock < 0) {
-      $("#percent").attr("class", "red");
-    } else {
-      $("#percent").attr("class", "black");
-    }
+    // URL to call API for the STOCK INFO
+    var stockUrl =
+      "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
+      currentSymbol +
+      "&apikey=" +
+      vantageKey;
+    // API CALL for the STOCK INFO in order to build chart and display high low etc
+    $.ajax({
+      url: stockUrl,
+      method: "GET",
+    }).then(function (response) {
+      //Assembles the data that is inserted into the chart
+      for (let i = 0; i < 52; i++) {
+        var priceDate = Object.keys(response["Weekly Time Series"])[i];
+        // console.log(response["Weekly Time Series"][priceDate]["4. close"]);
+        weeklyValue.unshift(
+          response["Weekly Time Series"][priceDate]["4. close"]
+        );
+        weeklyDate.unshift(priceDate);
+      }
+      visualData();
 
-    //Assembles the data that is inserted into the chart
-    for (let i = 0; i < 52; i++) {
-      var priceDate = Object.keys(response["Weekly Time Series"])[i];
-      // console.log(response["Weekly Time Series"][priceDate]["4. close"]);
-      weeklyValue.unshift(
-        response["Weekly Time Series"][priceDate]["4. close"]
-      );
-      weeklyDate.unshift(priceDate);
-    }
-    visualData();
-
-    //function the builds the chart into the page on the canvas element
-    //source: chartjs.org
-    function visualData() {
-      var ctx = document.getElementById("chart").getContext("2d");
-      Chart.defaults.global.defaultFontColor = "black";
-      var myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: weeklyDate, //what is listed as the x axis value
-          datasets: [
-            {
-              label: currentCompany,
-              data: weeklyValue,
-              backgroundColor: "rgba(0, 0, 0, 1)",
-              borderColor: "rgba(0, 0, 0, 1)",
-              borderWidth: 3,
-              fill: false,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            yAxes: [
+      //function the builds the chart into the page on the canvas element
+      //source: chartjs.org
+      function visualData() {
+        var ctx = document.getElementById("chart").getContext("2d");
+        Chart.defaults.global.defaultFontColor = "black";
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: weeklyDate, //what is listed as the x axis value
+            datasets: [
               {
-                ticks: {
-                  // beginAtZero: true
-                  callback: function (value, index, values) {
-                    return "$" + value;
-                  },
-                },
+                label: currentCompany,
+                data: weeklyValue,
+                backgroundColor: "rgba(0, 0, 0, 1)",
+                borderColor: "rgba(0, 0, 0, 1)",
+                borderWidth: 3,
+                fill: false,
               },
             ],
           },
-        },
-      });
-    } //End of the stuff the builds the chart on the canvas element
-  }); //END of STOCK API
-} //end of build page function
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    // beginAtZero: true
+                    callback: function (value, index, values) {
+                      return "$" + value;
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        });
+      } //End of the stuff the builds the chart on the canvas element
+    }); //END of STOCK API
+  }); //end of build page function
+}
 
 //==========END OF PART III=================\\
 //==========PART IV======NEWS===========\\
@@ -216,14 +227,12 @@ function buildNewsInfo() {
     var headLine = response.response.docs[0].headline.main;
     var snippet = response.response.docs[0].snippet;
     var timesUrl = response.response.docs[0].web_url;
-    console.log(response);
 
     newsAppended();
     function newsAppended() {
       $("#newsHeadLine").text(headLine);
       $("#newsSnippet").text(snippet);
       $("#newsUrl").attr("href", timesUrl).text("Read Full Article Here");
-      console.log(headLine);
     }
   }); //end of NEWS API stuff
 } // end of buildNewsInfo
@@ -231,12 +240,19 @@ function buildNewsInfo() {
 //==========END OF PART IV=================\\
 
 //    Local storage stuff
-var stockSymbol = "tsla";
-localStorage.setItem("key1", stockSymbol);
 
-var storedInfo = localStorage.getItem("key1");
+const storedInfo = localStorage.getItem("key1");
+const storedInfo2 = localStorage.getItem("key2");
+
 function displayLastSearch() {
   if (storedInfo !== undefined && storedInfo !== null) {
-    stockSymbol = storedInfo;
+    currentSymbol = storedInfo;
+    currentCompany = storedInfo2;
+    buildCompanyInfo();
+    buildStockInfo();
+    buildNewsInfo();
   }
 }
+$(document).ready(displayLastSearch());
+
+//==========END OF PART IV=================\\

@@ -37,11 +37,22 @@
     <main class="bgColor white-text center">
       <!-- Your content here -->
       <div>
-        <form class="padding">
-          <input type="text2" placeholder="Search Stock" id="companySearch2" />
-          <button type="button" id="searchBtn2" class="btnColor">Search</button>
+        <form>
+          <input
+            type="text2"
+            placeholder="Search For another Company"
+            id="companySearch2"
+          />
+          <button
+            type="button"
+            id="searchBtn2"
+            class="btn waves-effect waves-light btnsearch"
+          >
+            Search
+          </button>
         </form>
       </div>
+
       <div class="btn-group padding" id="stockList"></div>
 
       <div class="card">
@@ -58,23 +69,11 @@
           <canvas id="chart" width="250px" heigh="250px"></canvas>
         </div>
       </div>
-      <!-- Year Highs -->
-      <!-- <div class="row padding">
-        <div class="floatLeft center">
-          <h5 id="yearlyHigh" class="white-text">Yearly High</h5>
-          <p class="grey-text text-lighten-4 highs"></p>
-        </div> -->
-      <!-- Yearly Low -->
-      <!-- <div class="FloatRight center lows">
-          <h5 id="yearlyLow" class="white-text">Yearly Low</h5>
-          <p class="grey-text text-lighten-4"></p>
-        </div>
-      </div> -->
       <!-- News Card -->
       <div class="card">
         <div class="card-content black-text">
           <span class="card-title"></span>
-          <h4>Company News</h4>
+          <h5>Company News</h5>
           <h4 id="newsHeadLine" class="stockName"></h4>
           <p id="newsSnippet" class="news"></p>
           <br />

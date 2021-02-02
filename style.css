@@ -2,7 +2,7 @@
   width: 80%;
 }
 img {
-  background-image: url(/images/stockImg.jpg);
+  background-image: url(./images/stockImg.jpg);
   background-repeat: round;
   height: 530px;
   background-size: contain;

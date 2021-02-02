@@ -32,7 +32,7 @@ $("#searchBtn2").click(function (event) {
       $("#stockList").empty();
 
       if (arrBestMatches.length == 0) {
-        alert("The company does not have a stock symbol");
+        // alert("The company does not have a stock symbol");
         $("#stockList").text("0 results found");
         return;
       }
